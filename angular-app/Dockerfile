@@ -1,23 +1,10 @@
-# Use the official Node.js 16 image as a base
-FROM node:16
+FROM node:current-alpine AS builder
+WORKDIR /
+COPY . /app
+RUN npm install -g @angular/cli
+RUN cd /app && npm install 
+RUN cd /app && ng build --configuration=production
 
-# Set the working directory within the container
-WORKDIR /app
-
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application files to the container
-COPY . .
-
-# Build the Angular application
-RUN npm run build --prod
-
-# Expose port 80 to the outside world
-EXPOSE 80
-
-# Command to run the Angular application
-CMD ["npm", "run", "start"]
+# Effective Stage
+FROM nginx:alpine
+COPY --from=builder /app/dist/ci-project /usr/share/nginx/html
