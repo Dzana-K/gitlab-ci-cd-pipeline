@@ -1,0 +1,96 @@
+<!--<div>
+    <h1>Register</h1>
+  
+    <form (ngSubmit)="onSubmit()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" [(ngModel)]="formData.username" required>
+  
+      <br>
+  
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="formData.password" required>
+  
+      <br>
+  
+      <button type="submit">Login</button>
+    </form>
+  </div>-->
+
+<body class="background">
+
+
+  <div class="login-container">
+    <div class="picture-container">
+      <img src="../../../assets/pictures/background.png" alt="">
+      <div class="text-beneath-picture">
+        <span class="blue-text">Your Journey </span>
+        <span class="black-text">to Pet Adoption </span>
+        <br>
+        <span class="blue-text"> Begins Here</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="form-container">
+        <h1>Register</h1>
+        <div class="form-box">
+          <form (ngSubmit)="onSubmit()">
+
+            <div class="input-container">
+              <label for="email" class="text-style">EMAIL</label>
+              <input type="email" id="email" class="custom-input" name="email" [(ngModel)]="formData.email" required />
+            </div>
+
+            <div class="input-container">
+              <label for="password" class="text-style">PASSWORD</label>
+              <input type="password" id="password" class="custom-input" name="password" [(ngModel)]="formData.password"
+                required />
+            </div>
+            <div class="input-container">
+              <label for="first_name" class="text-style">FIRST NAME</label>
+              <input type="first_name" id="first_name" class="custom-input" name="first_name"
+                [(ngModel)]="formData.first_name" required />
+            </div>
+
+            <div class="input-container">
+              <label for="last_name" class="text-style">LAST NAME</label>
+              <input type="last_name" id="last_name" class="custom-input" name="last_name"
+                [(ngModel)]="formData.last_name" required />
+            </div>
+            <div class="input-container">
+              <label for="address" class="text-style">ADDRESS</label>
+              <input type="address" id="address" class="custom-input" name="address" [(ngModel)]="formData.address"
+                required />
+            </div>
+            <div class="input-row">
+              <div class="input-container">
+                <label for="city" class="text-style">CITY</label>
+                <input type="city" id="city" class="custom-input2" name="city" [(ngModel)]="formData.city" required />
+              </div>
+
+              <div class="input-container2">
+                <label for="country" class="text-style">COUNTRY</label>
+                <input type="country" id="country" class="custom-input2" name="country" [(ngModel)]="formData.country"
+                  required />
+              </div>
+            </div>
+
+            <div class="paw-button">
+              <button type="submit" class="custom-button">
+
+
+                Register</button>
+
+            </div>
+          </form>
+        </div>
+        <div style="padding-top: 10px;">
+          <span>Already have an account? Login </span>
+          <a [routerLink]="['/login']" style="text-decoration: none;">
+            <span style="color: blue; cursor: pointer; text-decoration: none;">here.</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>

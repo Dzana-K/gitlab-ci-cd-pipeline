@@ -1,0 +1,53 @@
+
+<body class="background">
+  
+<div class="login-container">
+  <div class="picture-container">
+    <img src="../../../assets/pictures/background.png" alt="">
+    <div class="text-beneath-picture">
+      <span class="blue-text">Your Journey </span> 
+      <span class="black-text" >to Pet Adoption </span>
+    <br>
+      <span class="blue-text"  > Begins Here</span>
+    </div>
+  </div>
+  
+  <div class="container">
+<div class="form-container">
+    <h1>Login</h1>
+    <div class="form-box">
+    <form (ngSubmit)="onSubmit()" >
+      
+      <div class="input-container">
+        <label for="email" class="text-style">EMAIL</label>
+        <input type="email" id="email" class="custom-input" name="email" [(ngModel)]="formData.email" required />
+      </div>
+      
+        <div class="input-container">
+        <label for="password" class="text-style">PASSWORD</label>
+        <input type="password" id="password" class="custom-input" name="password" [(ngModel)]="formData.password" required />
+      </div>
+  
+      
+      <div class="paw-button"  >
+        <button type="submit" class="custom-button" > 
+          
+          
+          Login</button>
+      
+          </div>
+    </form>
+    </div>
+    <div style="padding-top: 10px;">
+      <span >Don't have an account? Register </span> 
+      <a [routerLink]="['/register']" style="text-decoration: none;">
+      <span style="color: blue; cursor: pointer; text-decoration: none;">here.</span></a>
+    </div>
+  </div>
+  
+</div>
+</div>
+
+
+</body>
+  

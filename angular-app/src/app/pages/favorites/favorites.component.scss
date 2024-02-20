@@ -1,0 +1,94 @@
+.animal-main{
+    z-index: 3;
+    display: flex;
+   flex-wrap: wrap;
+   justify-content: start;
+   padding-left: 20px;
+  
+  }
+  .animal-details {
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+  .animal-container {
+    padding-top: 10px;
+    margin-bottom: 20px;
+    padding-right: 80px;
+    
+    
+  }
+  
+  .animal-image {
+   
+    overflow: hidden;
+  }
+  
+  .animal-image img {
+    max-width:100%;
+    
+    height: 170px;
+    width:100%;
+    border-radius: 8px 8px 0 0px;
+    object-fit: cover;
+  }
+  
+  .animal-info {
+    
+    margin-top: -15px;
+    padding: 0px;
+    width: 100%;
+    
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    background-color: #ffffff; /* Set the background color for the info section */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for elevation */
+  }
+
+  .name{
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    
+  }
+  .animal-breed{
+    display: flex;
+  }
+
+  .breed{
+    padding-left: 10px;
+    font-size: 14px;
+    color: #877d8e;
+    margin-top: -13px;
+  }
+  
+  .gender-male{
+    margin-left: auto;
+    margin-right: 5px;
+    background-color: #C3CDFF;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color:#657EFF
+  }
+  .gender-female{
+    margin-left: auto;
+    margin-right: 5px;
+    background-color: #FDB4AF;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color:#FB1E10
+  }
+
+  .title{
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+  }

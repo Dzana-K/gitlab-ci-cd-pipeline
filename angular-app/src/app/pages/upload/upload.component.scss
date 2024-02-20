@@ -1,0 +1,102 @@
+.text-style{
+    font-size: 16px;
+    color: #716D6D;
+    margin-bottom: 12px;
+
+}
+.custom-input {
+    display: flex;
+    align-items: center;
+    width: 490px;
+    height: 15px;
+    border: 1.5px solid #716d6d; /* Stroke color */
+    border-radius: 15px; /* Rounded corners */
+    background-color: #eef2f2; /* Fill color */
+    padding: 8px; /* Adjust padding as needed */
+    font-size: 14px; /* Adjust font size as needed */
+    color: #333; /* Text color */
+    outline: none; /* Remove outline on focus if desired */
+    margin-bottom: 20px;
+  }
+  
+  /* Add styles for focus state if needed */
+  .custom-input:focus {
+    border-color: #007bff; /* Adjust focus border color as needed */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adjust focus box shadow as needed */
+
+  }
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-container {
+    display: flex;
+    
+    flex-direction: row;
+    
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .left-group {
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 100px;
+  }
+  
+  .right-group {
+    margin-top: 0px;
+    margin-left: 100px;
+  }
+
+  .description {
+    height: 150px ;
+  }
+  .custom-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 150px;
+    height: 45px;
+    
+    background-color: #fdb4af ;
+    border: transparent; /* Hot pink stroke color */
+    border-radius: 30px; /* Adjust the border-radius to get a rounded shape */
+    padding: 10px 20px; /* Adjust padding as needed */
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #FC4D41; /* Hot pink text color */
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .custom-button svg {
+    margin-right: 20px; /* Adjust the spacing between the icon and text */
+  }
+  .paw-button{
+    
+    margin-top: 20px;
+  }
+  .header{
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+  }
+  .mat-select {
+    width: 100%; /* or adjust as needed */
+  }
+  
+  .mat-select-trigger {
+    border-radius: inherit; /* Inherit the border-radius from custom-input */
+  }
+  
+  /* Adjust the appearance of the dropdown panel */
+  .mat-select-panel {
+    border-radius: inherit; /* Inherit the border-radius from custom-input */
+  }

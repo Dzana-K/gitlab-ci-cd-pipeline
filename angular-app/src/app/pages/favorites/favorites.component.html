@@ -1,0 +1,25 @@
+
+  <p class="title">Your favorites</p>
+ <div class="animal-main">
+    <div *ngFor="let favorite of favorites" class="animal-container">
+        
+        <div class="animal-details">
+            <div class="animal-image">
+                <a [routerLink]="['/pet/detail',favorite.animal.id]">
+                    <div >
+                <img [src]="'http://127.0.0.1:5000' + favorite.animal.photos[0]" alt="Animal Photo">
+                </div>
+                </a>
+            </div>
+            <div class="animal-info">
+                <div class="animal-breed">
+        <p class="name">{{ favorite.animal.name }}</p>
+        <p [ngClass]="{'gender-female': favorite.animal.gender==='female', 'gender-male': favorite.animal.gender==='male'}" >{{ favorite.animal.gender }}</p>
+        
+    </div>
+        <p class="breed">{{ favorite.animal.breed }}</p>
+    </div>
+    
+    </div>
+    </div>
+    </div>

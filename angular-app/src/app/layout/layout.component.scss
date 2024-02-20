@@ -1,0 +1,51 @@
+// The CSS class for the single-page-application wrapper
+.app-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% );
+  
+    &.wrapper-full-page {
+      min-height: 100vh;
+      height: auto;
+    }
+  }
+  
+  // The CSS class for the Sidebar wrapper
+  .sidebar-wrapper {
+  width: 85px;
+  overflow: hidden;
+  }
+  
+  // The Main Panels CSS class
+  .main-panel {
+    width: calc(100%)  ;
+    background-color:#fff3ee;
+  
+    .main-content {
+      
+      min-height: calc(100%);
+      position: relative;
+    }
+  
+    .header {
+      margin-bottom: 0px;
+    }
+  }
+
+ 
+  .main-content-header {
+    background-color:#fff3ee; /* Main content header background color */
+    padding-top: 10px;
+  }
+  
+  .main-content-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(90, 42, 0); /* Main content title color */
+    background-color:#F4F7FC;
+  }
+  

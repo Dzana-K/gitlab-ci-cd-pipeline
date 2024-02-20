@@ -1,0 +1,79 @@
+/* adoption-page-modal.component.scss */
+
+/* Blurred backdrop */
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.5); /* Adjust the background color and opacity */
+    backdrop-filter: blur(900px); /* Adjust the blur amount */
+  }
+  
+  /* Additional styling for the modal container */
+  .mat-dialog-container {
+    //transform: translate(50%, -50%) !important;
+    border-radius: 20px; /* Add rounded corners if desired */
+    overflow: hidden; /* Prevent content from overflowing */
+  }
+  .text-style{
+    font-size: 16px;
+    color: #716D6D;
+    margin-bottom: 12px;
+
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+}
+
+.container{
+  display:flex;
+  justify-content: center;
+}
+.custom-input {
+    display: flex;
+    align-items: center;
+    width: 490px;
+    height: 15px;
+    border: 1.5px solid #716d6d; /* Stroke color */
+    border-radius: 15px; /* Rounded corners */
+    background-color: #eef2f2; /* Fill color */
+    padding: 8px; /* Adjust padding as needed */
+    font-size: 14px; /* Adjust font size as needed */
+    color: #333; /* Text color */
+    outline: none; /* Remove outline on focus if desired */
+    margin-bottom: 20px;
+  }
+  
+  /* Add styles for focus state if needed */
+  .custom-input:focus {
+    border-color: #007bff; /* Adjust focus border color as needed */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adjust focus box shadow as needed */
+
+  }
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .paw-button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .custom-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 170px;
+    height: 45px;
+    
+    background-color: #fdb4af ;
+    border: transparent; /* Hot pink stroke color */
+    border-radius: 30px; /* Adjust the border-radius to get a rounded shape */
+    padding: 10px 20px; /* Adjust padding as needed */
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #FC4D41; /* Hot pink text color */
+    font-weight: bold;
+    margin-right: 0px;
+  }
+  

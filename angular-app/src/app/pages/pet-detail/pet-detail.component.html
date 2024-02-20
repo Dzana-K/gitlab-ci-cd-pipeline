@@ -1,0 +1,94 @@
+<div *ngIf="animalDetails" >
+  <div class="header-container">
+  <p class="header">Home > {{animalDetails.name}}</p>
+  <div class="remove-container">
+    <button *ngIf="animalDetails.user_id === authenticatedUserId" (click)="deletePost(animalDetails.id)" class="remove-button">
+      <div class="remove-text">Remove Post <span class="close-icon">&times;</span></div>
+      
+    </button> 
+    <div  *ngIf="animalDetails.user_id !== authenticatedUserId">
+    <button (click)="toggleFavorite()" class="button-favorite">
+      <img src="../../../assets/icons/heart2-outline.svg" alt="Favorite" *ngIf="!is_favorite">
+      <img src="../../../assets/icons/heart2-fill.svg" alt="Favorite" *ngIf="is_favorite">
+    </button>
+  </div>
+    
+  </div>
+  
+</div>
+  <div class="pet-detail-container">
+    <div class="pictures">
+  <div class="picture-container">
+    <img *ngIf="animalDetails.photos && animalDetails.photos.length > 0" [src]="'http://127.0.0.1:5000' + animalDetails.photos[0]" alt="Animal Photo" />
+  </div>
+  <div class="additional-photos">
+    <!-- Additional photos -->
+    <div *ngFor="let photo of animalDetails.photos.slice(1); let i = index" class="additional-photo">
+      <img [src]="'http://127.0.0.1:5000' + photo" alt="Additional Photo {{ i + 1 }}" />
+    </div>
+  </div>
+  
+</div>
+  <div class="details-adoption">
+  <div class="details-container">
+    
+    <h2 class="name-box">{{ animalDetails.name }}</h2>
+    
+    <p class="details-dot">................................................................................................</p>
+    <p class="details-box">BREED: {{ animalDetails.breed }}</p>
+    <p class="details-box">GENDER: {{ animalDetails.gender }}</p>
+    <p class="details-box">AGE: {{ animalDetails.age }}</p>
+    <p class="details-box">WEIGHT: {{ animalDetails.weight }}</p>
+    <p class="details-box">COLOR: {{ animalDetails.color }}</p>
+    <p class="details-box">CITY: {{ animalDetails.city }}</p>
+    <p class="details-box">COUNTRY: {{ animalDetails.country }}</p>
+  
+    
+    </div>
+    <div class="adoption-info" *ngIf="user">
+      <h2 class="adoption-header">Adoption Info</h2>
+      <p class="details-dot">................................................................................................</p>
+    
+      <p class="info extra">{{ user.first_name }} {{user.last_name}}</p>
+      
+      <p class="info">{{ user.city }}, {{user.country}}</p>
+      <p class="info extra">{{ user.email }}</p>
+      </div>
+
+      <div class="adoption-info">
+        <h2 class="description-header">Description</h2>
+        <p class="details-dot">................................................................................................</p>
+      
+        <p class="info">{{animalDetails.description}}</p>
+        
+        
+        </div>
+  </div>
+  
+  
+</div>
+<div class="paw-button"  *ngIf="animalDetails.user_id !== authenticatedUserId">
+  <button type="submit" class="custom-button" (click)="openAdoptionModal()"> 
+    
+    <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_97_3062)">
+    <path d="M21.8839 17.9691C20.4145 15.6984 17.912 14.3425 15.1895 14.3425C12.467 14.3425 9.96452 15.6984 8.4954 17.9691L4.95478 23.4407C4.36733 24.3484 4.09628 25.3972 4.17077 26.473C4.24526 27.549 4.65857 28.551 5.36584 29.3713C6.07362 30.1909 7.00885 30.7511 8.07039 30.9915C9.13193 31.2318 10.2201 31.1292 11.2171 30.6951L11.2839 30.6657C13.7926 29.5951 16.6594 29.605 19.1616 30.6951C19.8071 30.9762 20.491 31.1183 21.1811 31.1183C21.5562 31.1183 21.9337 31.0761 22.3076 30.9917C23.3692 30.7516 24.3044 30.1914 25.0124 29.3715C25.7199 28.5519 26.1335 27.5497 26.2082 26.4735C26.283 25.3972 26.0119 24.3486 25.4245 23.4404L21.8839 17.9691Z" fill="#D93C3C"/>
+    <path d="M5.90864 17.9621C6.96196 17.5613 7.76216 16.7205 8.16176 15.5944C8.54218 14.5228 8.51104 13.3131 8.07382 12.1877C7.63635 11.0631 6.84063 10.145 5.83315 9.60235C4.77485 9.03251 3.61217 8.93972 2.56059 9.34124C0.44499 10.147 -0.525866 12.7368 0.396659 15.1156C1.13358 17.009 2.85232 18.2042 4.59 18.2042C5.0337 18.2042 5.47864 18.1262 5.90864 17.9621Z" fill="#F7CC35"/>
+    <path d="M12.7784 13.6753C15.4232 13.6753 17.5749 11.2469 17.5749 8.26197C17.5749 5.27631 15.4232 2.84741 12.7784 2.84741C10.1339 2.84741 7.98242 5.27631 7.98242 8.26197C7.98242 11.2469 10.1339 13.6753 12.7784 13.6753Z" fill="#4EE835"/>
+    <path d="M21.0621 15.0052H21.0623C21.4691 15.1389 21.8842 15.2028 22.2975 15.2028C24.2262 15.2028 26.1059 13.8122 26.8232 11.675C27.2362 10.4447 27.2091 9.14391 26.7467 8.01238C26.2629 6.82779 25.3663 5.96798 24.2218 5.59113C23.077 5.21428 21.8391 5.37149 20.7357 6.03337C19.6816 6.66565 18.874 7.69155 18.4614 8.9218C17.5907 11.517 18.7574 14.246 21.0621 15.0052V15.0052Z" fill="#455FEA"/>
+    <path d="M31.1629 14.3735L31.1621 14.3728C29.3382 13.0381 26.6105 13.6166 25.0811 15.663C23.5532 17.7103 23.7921 20.4628 25.6133 21.7984C26.2774 22.2858 27.0622 22.5188 27.8654 22.5188C29.2652 22.5188 30.7217 21.811 31.6952 20.5094C33.2229 18.4621 32.9842 15.7096 31.1629 14.3735V14.3735Z" fill="#E02CB9"/>
+    </g>
+    <defs>
+    <clipPath id="clip0_97_3062">
+    <rect width="32.6538" height="32.3472" fill="white" transform="translate(0.0478516 0.825684)"/>
+    </clipPath>
+    </defs>
+    </svg>
+  
+    Adoption</button>
+
+    </div>
+</div>
+
+
+  

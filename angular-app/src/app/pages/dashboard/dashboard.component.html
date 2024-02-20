@@ -1,0 +1,64 @@
+<div class="container">
+    
+   <!---- <div class="pink-background"></div>
+<div class="dog-picture"></div>-->
+<div class="banner-text"> Will you give me a <br>new home?</div>
+    <div class="content">
+
+    
+  <div class="search-bar-container">
+    <input type="text" placeholder="Search e.g. dog,male,London" [(ngModel)]="searchQuery" (keyup.enter)="searchAnimals()" #searchbar />
+    <button mat-icon-button (click)="searchAnimals()" class="magnifying-glass">
+        <mat-icon >search</mat-icon>
+      </button>
+  </div>
+  <div class="button-filters">
+    <button (click)="filterAnimals('dog')" class="animal-button">
+        <img src="../../../assets/pictures/Group 162.png" alt="Dog" style="width: 90px; height: 80px; border-radius: 50%; background: none;padding-right: 10px;">
+        <br>
+        <span class="animal-button-text">Dogs</span>  
+    </button>
+      
+      <button (click)="filterAnimals('cat')" style="background: none; border: none;cursor: pointer;">
+        <img src="../../../assets/pictures/Group 163.png" alt="Cat" style="width: 90px; height: 80px; border-radius: 50%;padding-right: 10px;">
+        <br>
+        <span class="animal-button-text">Cats</span>
+      </button>
+      <button (click)="filterAnimals('bird')" style="background: none; border: none;cursor: pointer;">
+        <img src="../../../assets/pictures/Group 164.png" alt="Bird" style="width: 90px; height: 80px; border-radius: 50%;padding-right: 10px;">
+        <br>
+        <span class="animal-button-text">Birds</span>
+    </button>
+      <button (click)="filterAnimals('fish')" style="background: none; border: none;cursor: pointer;">
+        <img src="../../../assets/pictures/Group 165.png" alt="Fish" style="width: 90px; height: 80px; border-radius: 50%;padding-right: 10px;">
+        <br>
+        <span class="animal-button-text">Fish</span>  
+    </button>
+    
+  </div>
+  <div class="animal-main">
+<div *ngFor="let animal of animals" class="animal-container">
+    
+    <div class="animal-details">
+        <div class="animal-image">
+            <a [routerLink]="['/pet/detail',animal.id]">
+                <div >
+                <img [src]="'http://127.0.0.1:5000' + animal.photos[0]" alt="Animal Photo">
+                </div>
+            </a>
+        </div>
+        <div class="animal-info">
+            <div class="animal-breed">
+    <p class="name">{{ animal.name }}</p>
+    <p [ngClass]="{'gender-female': animal.gender==='female', 'gender-male': animal.gender==='male'}" >{{ animal.gender }}</p>
+    
+</div>
+    <p class="breed">{{ animal.breed }}</p>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>

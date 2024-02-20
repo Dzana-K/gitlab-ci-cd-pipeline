@@ -1,0 +1,75 @@
+<!--
+  HTML template for Sidebar component
+  The sidebar page is always active, and it holds the navigation menues for the application
+-->
+
+<div class="sidebar">
+    <mat-list role="list" class="nav">
+      <div class="sidebar-header">
+        <p class="sidebar-title">Paw </p>
+        <p class="sidebar-title-2">Adopt</p>
+      </div>
+      <div *ngFor="let menuitem of menuItems; index as i">
+        <!-- Single router menu entry -->
+        <mat-list-item
+          class="list-item"
+          role="listitem"
+          [routerLinkActive]="['is-active']"
+          [routerLinkActiveOptions]="myMatchOptions"
+          (mouseenter)="enter(i)"
+          (mouseleave)="leave()"
+          *ngIf="menuitem.type === 'single'"
+          (click)="stay(i)"
+        >
+          <div class="selected-menu-item"></div>
+  
+          <a
+            mat-list-item
+            [routerLink]="[menuitem.path]"
+            
+            [disabled]="!menuitem.active"
+          >
+            <div class="column-menu">
+              <mat-icon
+                *ngIf="hoverIndex === i || stayIndex === i"
+                class="sidebar-icons"
+                svgIcon="{{ menuitem.iconFill }}"
+              ></mat-icon>
+              <mat-icon
+                *ngIf="hoverIndex !== i && stayIndex !== i"
+                class="sidebar-icons"
+                svgIcon="{{ menuitem.icon }}"
+              ></mat-icon>
+              <div class="menuitem-title">{{ menuitem.title }}</div>
+            </div>
+          </a>
+        </mat-list-item>
+  
+        <mat-list-item
+        *ngIf="menuitem.type === 'button'"
+        class="list-item logout"
+      >
+        <a mat-list-item>
+          <button
+            mat-icon-button
+            class="menu-button"
+            aria-label="Logout"
+            [disabled]="!menuitem.active"
+            (click)="logout()"
+          >
+            <div class="column-menu">
+              <mat-icon class="sidebar-icons">
+                {{ menuitem.icon }}
+              </mat-icon>
+              <div class="menuitem-title-logout">
+                {{ menuitem.title }}
+              </div>
+            </div>
+          </button>
+        </a>
+      </mat-list-item>
+        
+      </div>
+    </mat-list>
+    
+  </div>
