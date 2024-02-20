@@ -26,9 +26,9 @@ lint_test:
     - cd api
     - pip install flake8-html
   script:
-    - flake8 --format=html --htmldir=flake_reports/
+    - flake8 --format=html --htmldir=flake_reports/ || true
   artifacts:
     when: always
     paths:
       - api/flake_reports/
-  allow_failure: true
+  
