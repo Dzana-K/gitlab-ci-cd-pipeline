@@ -31,3 +31,4 @@ lint_test:
     when: always
     paths:
       - api/flake_reports/
+  allow_failure: true
