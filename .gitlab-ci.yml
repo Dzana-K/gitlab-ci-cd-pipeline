@@ -1,6 +1,6 @@
 stages:
-  - build_frontend
-  - build_backend
+  - build
+  - build
 
 variables:
   DOCKER_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
@@ -9,7 +9,7 @@ build_frontend:
   image: docker:latest
   services:
     - docker:dind
-  stage: build_frontend
+  stage: build
   before_script:
     - cd angular-app
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -21,7 +21,7 @@ build_backend:
   image: docker:latest
   services:
     - docker:dind
-  stage: build_backend
+  stage: build
   before_script:
     - cd api
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
