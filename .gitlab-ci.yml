@@ -1,6 +1,6 @@
 stages:
   - build
-  - build
+  - test
 
 variables:
   DOCKER_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
@@ -28,3 +28,16 @@ build_backend:
   script:
     - docker build -t $DOCKER_IMAGE_TAG .
     - docker push $DOCKER_IMAGE_TAG
+
+lint_test:
+  image: python:3.8.0-slim
+  stage: test
+  before_script:
+    - cd api
+    - pip install flake8-html
+  script:
+    - flake8 --format=html --htmldir=flake_reports/
+  artifacts:
+    when: always
+    paths:
+      - flake_reports/
