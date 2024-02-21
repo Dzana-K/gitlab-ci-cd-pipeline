@@ -1,11 +1,12 @@
 import pytest
 
-from app import app
+from app import create_app
 from db import db
 from models.pet import AnimalModel
 
 @pytest.fixture
 def client():
+    app = create_app()
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     with app.test_client() as client:
