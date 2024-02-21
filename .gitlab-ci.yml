@@ -32,3 +32,16 @@ lint_test:
     paths:
       - api/flake_reports/
   
+pytest_backend:
+  image: python:3.8.0-slim
+  stage: test
+  before_script:
+    - cd api  # Navigate to the backend directory
+    - pip install pytest-html
+    - pip install -r requirements.txt  # Install backend dependencies if any
+  script:
+    - pytest --html=pytest_reports/pytest-report.html --self-contained-html
+  artifacts:
+    when: always
+    paths:
+      - api/pytest_reports/
