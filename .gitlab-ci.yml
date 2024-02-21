@@ -81,7 +81,7 @@ snyk_scan:
     snyk test --file=requirements.txt 
     
 run-dast-job:
-    stage: dast-scan
+    stage: test
     image: maven:3.8.5-openjdk-11-slim
     before_script:
       - cd api
