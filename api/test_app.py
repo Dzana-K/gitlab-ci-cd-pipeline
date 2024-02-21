@@ -19,7 +19,7 @@ def client():
         with app.app_context():
             db.session.remove()
             db.drop_all()
-
+@pytest.mark.usefixtures("client")
 def test_add_animal(client):
     logging.debug("Starting test_add_animal")
     # Make a POST request to add a new animal
@@ -34,7 +34,7 @@ def test_add_animal(client):
     assert animal.gender == 'male'
     assert animal.city == 'Test City'
     assert animal.country == 'Test Country'
-
+@pytest.mark.usefixtures("client")
 def test_fetch_animal(client):
     logging.debug("Starting test_fetch_animal")
     # Add a test animal to the database
