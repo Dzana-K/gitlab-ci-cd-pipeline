@@ -7,7 +7,9 @@ from models.pet import AnimalModel
 logging.basicConfig(level=logging.DEBUG)
 @pytest.fixture
 def client():
+    logging.debug("Starting test_add_animal")
     app = create_app()
+    logging.debug("Starting test_add_animal")
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     with app.test_client() as client:
