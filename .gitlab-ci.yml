@@ -95,6 +95,6 @@ run-dast-job:
     ./zap.sh -cmd -quickurl https://$FEATURE_APP.herokuapp.com/ -quickprogress -quickout ../zap_report.html 
   artifacts:
     paths:
-      - zap_report.html
+      - api/zap_report.html
   ##only:
   ##- /^feature-.*$/    
