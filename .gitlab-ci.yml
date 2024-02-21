@@ -81,20 +81,20 @@ snyk_scan:
     snyk test --file=requirements.txt 
     
 run-dast-job:
-    stage: test
-    image: maven:3.8.5-openjdk-11-slim
-    before_script:
-      - cd api
-    script: |
-      apt-get update
-      apt-get -y install wget
-      wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2.11.1_Linux.tar.gz
-      mkdir zap
-      tar -xvf ZAP_2.11.1_Linux.tar.gz
-      cd ZAP_2.11.1
-      ./zap.sh -cmd -quickurl https://$FEATURE_APP.herokuapp.com/ -quickprogress -quickout ../zap_report.html 
-    artifacts:
-      paths:
-        - zap_report.html
-    only:
-    - /^feature-.*$/    
+  stage: test
+  image: maven:3.8.5-openjdk-11-slim
+  before_script:
+    - cd api
+  script: |
+    apt-get update
+    apt-get -y install wget
+    wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2.11.1_Linux.tar.gz
+    mkdir zap
+    tar -xvf ZAP_2.11.1_Linux.tar.gz
+    cd ZAP_2.11.1
+    ./zap.sh -cmd -quickurl https://$FEATURE_APP.herokuapp.com/ -quickprogress -quickout ../zap_report.html 
+  artifacts:
+    paths:
+      - zap_report.html
+  only:
+  - /^feature-.*$/    
