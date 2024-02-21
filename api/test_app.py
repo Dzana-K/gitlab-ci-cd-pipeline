@@ -2,8 +2,9 @@ import pytest
 
 from app import create_app
 from db import db
+import logging
 from models.pet import AnimalModel
-
+logging.basicConfig(level=logging.DEBUG)
 @pytest.fixture
 def client():
     app = create_app()
@@ -18,6 +19,7 @@ def client():
             db.drop_all()
 
 def test_add_animal(client):
+    logging.debug("Starting test_add_animal")
     # Make a POST request to add a new animal
     data = {'name': 'New Test Animal', 'gender': 'male', 'city': 'Test City', 'country': 'Test Country'}
     response = client.post('/animals', data=data)
@@ -32,6 +34,7 @@ def test_add_animal(client):
     assert animal.country == 'Test Country'
 
 def test_fetch_animal(client):
+    logging.debug("Starting test_fetch_animal")
     # Add a test animal to the database
     animal = AnimalModel(name='Test Animal', gender='male', city='Test City', country='Test Country')
     db.session.add(animal)
