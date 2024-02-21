@@ -109,5 +109,5 @@ def create_app(db_url=None):
     api.register_blueprint(UserBlueprint)
     api.register_blueprint(PetBlueprint)
     api.register_blueprint(FavoriteBlueprint)
-    app.run(host='0.0.0.0', port=5000)
+    
     return app
