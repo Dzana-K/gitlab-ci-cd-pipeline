@@ -21,8 +21,8 @@ from blocklist import BLOCKLIST
 blp=Blueprint("Pets", "pets", description="Operations on pets")
 @blp.route("/animals")
 class AnimalsAPI(MethodView):
-    @jwt_required()
-    @blp.response(200,AnimalSchema(many=True))
+    
+    @blp.response(200)
     def get(self):
         ##animals = AnimalModel.query.all()
         """""
@@ -85,8 +85,8 @@ class AnimalsAPI(MethodView):
         print(animal_list)
         return jsonify(animal_list)
     
-    @jwt_required()
-    @blp.response(201, AnimalSchema)
+    
+    @blp.response(201)
     def post(self):
         data = request.form.to_dict()
         user_id = get_jwt_identity()
