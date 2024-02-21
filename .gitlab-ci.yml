@@ -96,5 +96,5 @@ run-dast-job:
   artifacts:
     paths:
       - zap_report.html
-  only:
-  - /^feature-.*$/    
+  ##only:
+  ##- /^feature-.*$/    
