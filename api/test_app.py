@@ -7,7 +7,7 @@ from models.pet import AnimalModel
 logging.basicConfig(level=logging.DEBUG)
 @pytest.fixture
 def client():
-    logging.debug("Starting test_add_animal")
+    print("Starting test_add_animal")
     app = create_app()
     logging.debug("Starting test_add_animal")
     app.config['TESTING'] = True
