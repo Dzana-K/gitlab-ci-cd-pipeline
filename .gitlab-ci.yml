@@ -52,6 +52,8 @@ run-sast-job:
   image: python:3.8-slim
   before_script:
     - cd api
+    - export JAVA_HOME="/c/Program Files/Java/jdk-21"
+    - export PATH="$JAVA_HOME/bin:$PATH"
   script: |
     apt-get update && apt-get install -y unzip curl jq
     curl -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
