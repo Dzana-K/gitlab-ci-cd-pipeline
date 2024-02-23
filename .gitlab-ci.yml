@@ -36,7 +36,7 @@ build:
 
 test:
   stage: test
-  image: node:12-alpine
+  image: node:21-alpine
   cache:
     paths:
       - angular-app/node_modules/
