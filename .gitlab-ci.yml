@@ -164,6 +164,7 @@ snyk-scan-frontend:
   before_script:
     - cd angular-app
     - npm install -g snyk
+    - snyk auth $SNYK_TOKEN
     
   script: 
     
