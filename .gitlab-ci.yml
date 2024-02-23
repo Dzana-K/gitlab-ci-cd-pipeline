@@ -48,7 +48,7 @@ test:
     - npm install -g @angular/cli
     
   script:
-    - ng test --watch false 
+    - ng test --watch=false 
   artifacts:
     reports:
       junit: angular-app/testReports/
