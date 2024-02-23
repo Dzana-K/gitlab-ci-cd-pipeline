@@ -19,7 +19,33 @@ build_backend:
   script:
     - docker build -t $DOCKER_IMAGE_TAG .
     - docker push $DOCKER_IMAGE_TAG
+  only:
+  - /^feature-.*$/ 
 
+build:
+  stage: build
+  image: node:latest
+  cache:
+    paths:
+      - angular-app/node_modules/
+  before_script:
+    - cd angular-app
+    - npm install
+  script:
+    - npm run build -- --prod
+
+test:
+  stage: test
+  image: node:latest
+  cache:
+    paths:
+      - angular-app/node_modules/
+  before_script:
+    - cd angular-app
+    - npm install
+    
+  script:
+    - ng test --code-coverage --watch=false
 lint_test:
   image: python:3.8.0-slim
   stage: test
@@ -67,6 +93,8 @@ run-sast-job:
     quality_status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=pawadopt_pawadopt | jq -r '.projectStatus.status')
     echo "SonarCloud Analysis Status is $quality_status"; 
     if [[ $quality_status == "ERROR" ]] ; then exit 1;fi 
+  only:
+  - /^feature-.*$/ 
 
 snyk_scan:
   stage: test

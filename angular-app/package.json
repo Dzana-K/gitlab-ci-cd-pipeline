@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "serve:ssr:angular-app": "node dist/angular-app/server/server.mjs"
   },
   "private": true,
@@ -24,6 +26,7 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.7",
+    "cypress": "^13.6.6",
     "express": "^4.18.2",
     "g": "^2.0.1",
     "rxjs": "~7.8.0",
