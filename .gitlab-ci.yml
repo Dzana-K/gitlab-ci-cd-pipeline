@@ -31,20 +31,17 @@ build:
   before_script:
     - cd angular-app
     - npm install
+    - npm install -g @angular/cli
   script:
     - npm run build -- --prod
 
 test:
   stage: test
   image: trion/ng-cli-karma
-  cache:
-    paths:
-      - angular-app/node_modules/
+  
   before_script:
     - cd angular-app
     
-    - npm install
-    - npm install -g @angular/cli
     
   script:
     - npm ci
@@ -52,7 +49,7 @@ test:
   artifacts:
     reports:
       junit: 
-      - angular-app/testReports/report.xml
+      - /angular-app/testReports/report.xml
 lint_test:
   image: python:3.8.0-slim
   stage: test
