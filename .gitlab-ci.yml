@@ -46,9 +46,7 @@ test:
   script:
     - npm ci
     - ng test --progress false --watch false
-  artifacts:
-    reports:
-      junit: testReports/report.xml
+  
 lint_test:
   image: python:3.8.0-slim
   stage: test
