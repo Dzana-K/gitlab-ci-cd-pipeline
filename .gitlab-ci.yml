@@ -47,7 +47,8 @@ test:
     - npm install -g @angular/cli
     
   script:
-    - ng test --progress false --watch false --browsers ChromeHeadless --no-sandbox
+    - npm ci
+    - ng test --progress false --watch false
   artifacts:
     reports:
       junit: angular-app/testReports/
