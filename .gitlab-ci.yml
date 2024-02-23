@@ -33,7 +33,7 @@ build:
     - npm install
     - npm install -g @angular/cli
   script:
-    - npm run build -- --prod
+    - npm run build --prod
 
 test:
   stage: test
