@@ -56,7 +56,8 @@ build-frontend:
   - /^feature-.*$/   
 
 test:
-  image: cypress/base:14
+  image: cypress/base
+
   stage: test
   before_script:
     - cd angular-app
@@ -67,7 +68,7 @@ test:
     - npm start &
     # run Cypress tests
     - npm run cypress:run
-    
+
 unit-test-frontend:
   stage: test
   image: trion/ng-cli-karma
