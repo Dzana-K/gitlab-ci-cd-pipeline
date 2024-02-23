@@ -170,8 +170,8 @@ snyk-scan-frontend:
     - snyk auth $SNYK_TOKEN
     - snyk test --all-projects --json > snyk-report.json
   artifacts:
-    reports:
-      snyk: snyk-report.json
+    paths:
+      - angular-app/snyk-report.json
   
 
 snyk_scan:
