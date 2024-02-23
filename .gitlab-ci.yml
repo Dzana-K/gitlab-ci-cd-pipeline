@@ -168,11 +168,8 @@ snyk-scan-frontend:
     
   script: 
     - snyk auth $SNYK_TOKEN
-    - snyk test 
-  artifacts:
-    paths:
-      - angular-app/snyk-report.json
-  
+    - snyk monitor 
+ 
 
 snyk_scan:
   stage: test
