@@ -38,6 +38,8 @@ lint-frontend:
   artifacts:
     paths:
       - angular-app/eslint-reports/
+  only:
+  - /^feature-.*$/ 
 build-frontend:
   stage: build
   image: node:latest
@@ -53,6 +55,22 @@ build-frontend:
   only:
   - /^feature-.*$/   
 
+e2e:
+  stage: test
+  image: cypress/base:14
+  cache:
+    paths:
+      - angular-app/node_modules/
+  before_script:
+    - cd angular-app
+    - npm install
+  script:
+    - npm run cypress:run
+  artifacts:
+    when: always
+    paths:
+      - angular-app/cypress/screenshots/
+      - angular-app/cypress/videos/
 unit-test-frontend:
   stage: test
   image: trion/ng-cli-karma
