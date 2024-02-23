@@ -58,6 +58,8 @@ build-frontend:
 test:
   image: node:latest
   stage: test
+  before_script:
+    - cd angular-app
   script:
     # install dependencies
     - npm ci
