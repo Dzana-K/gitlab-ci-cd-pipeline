@@ -36,7 +36,7 @@ build:
 
 test:
   stage: test
-  image: node:latest
+  image: trion/ng-cli-karma
   cache:
     paths:
       - angular-app/node_modules/
@@ -47,7 +47,7 @@ test:
     - npm install -g @angular/cli
     
   script:
-    - - ng test --progress false --watch false --browsers ChromeHeadless --no-sandbox
+    - ng test --progress false --watch false --browsers ChromeHeadless --no-sandbox
   artifacts:
     reports:
       junit: angular-app/testReports/
