@@ -55,22 +55,16 @@ build-frontend:
   only:
   - /^feature-.*$/   
 
-e2e:
+test:
+  image: node:latest
   stage: test
-  image: cypress/base:14
-  cache:
-    paths:
-      - angular-app/node_modules/
-  before_script:
-    - cd angular-app
-    - npm install
   script:
-    - npm run cypress:run
-  artifacts:
-    when: always
-    paths:
-      - angular-app/cypress/screenshots/
-      - angular-app/cypress/videos/
+    # install dependencies
+    - npm ci
+    # start the server in the background
+    - npm start &
+    # run Cypress tests
+    - npm run e2e
 unit-test-frontend:
   stage: test
   image: trion/ng-cli-karma
