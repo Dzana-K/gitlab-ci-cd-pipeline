@@ -23,7 +23,7 @@ build_backend:
   - /^feature-.*$/ 
 
 lint-frontend:
-  stage: lint
+  stage: test
   image: node:latest
   cache:
     paths:
