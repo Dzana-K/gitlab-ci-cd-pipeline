@@ -42,6 +42,8 @@ test:
       - angular-app/node_modules/
   before_script:
     - cd angular-app
+    - apk add chromium
+    - export CHROME_BIN=/usr/bin/chromium-browser
     - npm install
     - npm install -g @angular/cli
     
