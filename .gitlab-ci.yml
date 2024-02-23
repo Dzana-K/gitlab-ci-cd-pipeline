@@ -120,7 +120,7 @@ pytest-backend:
   only:
   - /^feature-.*$/    
 
-run-sast-job:
+run-sast-job-backend:
   stage: test
   image: python:3.8-slim
   before_script:
@@ -139,7 +139,7 @@ run-sast-job:
   only:
   - /^feature-.*$/ 
 
-run-sast-job:
+run-sast-job-frontend:
   stage: test
   image: sonarsource/sonar-scanner-cli
   before_script:
@@ -155,6 +155,23 @@ run-sast-job:
     quality_status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=pawadopt-frontend_pawadopt-frontend | jq -r '.projectStatus.status')
     echo "SonarCloud Analysis Status is $quality_status"; 
     if [[ $quality_status == "ERROR" ]] ; then exit 1;fi
+  only:
+  - /^feature-.*$/ 
+
+snyk_scan:
+  stage: test
+  
+  before_script:
+    - cd angular-app
+    - npm install -g snyk
+    
+  script: 
+    
+    - snyk test --all-projects --json > snyk-report.json
+  artifacts:
+    reports:
+      snyk: snyk-report.json
+  
 
 snyk_scan:
   stage: test
