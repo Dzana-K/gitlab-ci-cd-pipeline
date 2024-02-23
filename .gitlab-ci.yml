@@ -68,6 +68,7 @@ test:
     
     # start the server in the background
     - npm start &
+    - sleep 10
     # run Cypress tests
     - npm run cypress:run
 
