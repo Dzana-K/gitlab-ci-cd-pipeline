@@ -49,7 +49,7 @@ test:
     - ng test --progress false --watch false --browsers FirefoxHeadless
   artifacts:
     reports:
-      junit: testReports/report.xml
+      junit: angular-app/testReports/report.xml
 lint_test:
   image: python:3.8.0-slim
   stage: test
