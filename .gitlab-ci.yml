@@ -46,7 +46,10 @@ test:
     - npm install -g @angular/cli
     
   script:
-    - ng test --code-coverage --watch=false
+    - ng test --progress false --watch false
+  artifacts:
+    reports:
+      junit: angular-app/testReports/report.xml
 lint_test:
   image: python:3.8.0-slim
   stage: test
