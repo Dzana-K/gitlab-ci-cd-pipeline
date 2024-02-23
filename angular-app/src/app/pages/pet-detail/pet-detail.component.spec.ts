@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PetDetailComponent } from './pet-detail.component';
+import { PetDetailModule } from './pet-detail.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterModule } from '@angular/router';
 
 describe('PetDetailComponent', () => {
   let component: PetDetailComponent;
@@ -8,10 +11,10 @@ describe('PetDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PetDetailComponent]
+      imports: [PetDetailModule, RouterModule.forRoot([]), HttpClientTestingModule,]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PetDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
