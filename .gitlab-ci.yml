@@ -22,7 +22,23 @@ build_backend:
   only:
   - /^feature-.*$/ 
 
-build:
+lint-frontend:
+  stage: lint
+  image: node:latest
+  cache:
+    paths:
+      - angular-app/node_modules/
+  before_script:
+    - cd angular-app
+    - npm install
+    - npm install -g @angular/cli
+  script:
+    - npm run lint
+  allow_failure: true
+  artifacts:
+    paths:
+      - angular-app/eslint-reports/
+build-frontend:
   stage: build
   image: node:latest
   cache:
@@ -34,8 +50,10 @@ build:
     - npm install -g @angular/cli
   script:
     - npm run build --prod
+  only:
+  - /^feature-.*$/   
 
-test:
+unit-test-frontend:
   stage: test
   image: trion/ng-cli-karma
   
@@ -46,8 +64,10 @@ test:
   script:
     - npm ci
     - ng test --progress false --watch false
+  only:
+  - /^feature-.*$/    
   
-lint_test:
+lint-test-backend:
   image: python:3.8.0-slim
   stage: test
   before_script:
@@ -62,7 +82,7 @@ lint_test:
   only:
   - /^feature-.*$/    
   
-pytest_backend:
+pytest-backend:
   image: python:3.8.0-slim
   stage: test
   before_script:
