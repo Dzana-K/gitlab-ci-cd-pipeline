@@ -32,6 +32,8 @@ lint_test:
     when: always
     paths:
       - api/flake_reports/
+  only:
+  - /^feature-.*$/    
   
 pytest_backend:
   image: python:3.8.0-slim
@@ -46,6 +48,8 @@ pytest_backend:
     when: always
     paths:
       - api/pytest_reports/
+  only:
+  - /^feature-.*$/    
 
 run-sast-job:
   stage: test
@@ -80,6 +84,8 @@ snyk_scan:
     npm install -g snyk
     snyk auth $SNYK_TOKEN
     snyk test --file=requirements.txt 
+  only:
+  - /^feature-.*$/    
     
 run-dast-job:
   stage: test
@@ -97,5 +103,5 @@ run-dast-job:
   artifacts:
     paths:
       - api/zap_report.html
-  ##only:
-  ##- /^feature-.*$/    
+  only:
+  - /^feature-.*$/    
