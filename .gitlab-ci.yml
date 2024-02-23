@@ -46,10 +46,10 @@ test:
     - npm install -g @angular/cli
     
   script:
-    - ng test --progress false --watch false
+    - ng test --progress false --watch false --browsers FirefoxHeadless
   artifacts:
     reports:
-      junit: angular-app/testReports/report.xml
+      junit: testReports/report.xml
 lint_test:
   image: python:3.8.0-slim
   stage: test
