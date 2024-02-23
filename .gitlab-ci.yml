@@ -158,7 +158,7 @@ run-sast-job-frontend:
   only:
   - /^feature-.*$/ 
 
-snyk_scan:
+snyk-scan-frontend:
   stage: test
   
   before_script:
