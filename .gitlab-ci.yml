@@ -43,6 +43,7 @@ test:
   before_script:
     - cd angular-app
     - npm install
+    - npm install -g @angular/cli
     
   script:
     - ng test --code-coverage --watch=false
