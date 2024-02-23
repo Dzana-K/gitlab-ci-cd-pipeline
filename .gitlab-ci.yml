@@ -160,7 +160,7 @@ run-sast-job-frontend:
 
 snyk-scan-frontend:
   stage: test
-  
+  image: node:latest
   before_script:
     - cd angular-app
     - npm install -g snyk
