@@ -146,15 +146,15 @@ run-sast-job:
     - cd angular-app
     
   script: |
-    apt-get update && apt-get install -y unzip curl jq
-    curl -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-    unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-    export PATH="$PATH:$(pwd)/sonar-scanner-5.0.1.3006-linux/bin"
+    apt-get update && apt-get install -y wget tar curl jq
+    wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+    unzip sonar-scanner-cli-5.0.1.3006-linux.zip -d sonar-scanner
+    export PATH="$PATH:$(pwd)/sonar-scanner/sonar-scanner-5.0.1.3006-linux/bin"
     sonar-scanner -Dsonar.projectKey=pawadopt-frontend_pawadopt-frontend -Dsonar.organization=pawadopt-frontend -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.login=$SONAR_TOKEN
     sleep 5 
     quality_status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=pawadopt-frontend_pawadopt-frontend | jq -r '.projectStatus.status')
     echo "SonarCloud Analysis Status is $quality_status"; 
-    if [[ $quality_status == "ERROR" ]] ; then exit 1;fi 
+    if [[ $quality_status == "ERROR" ]] ; then exit 1;fi
   
 
 snyk_scan:
