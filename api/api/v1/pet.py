@@ -21,8 +21,8 @@ from blocklist import BLOCKLIST
 blp=Blueprint("Pets", "pets", description="Operations on pets")
 @blp.route("/animals")
 class AnimalsAPI(MethodView):
-    
-    @blp.response(200)
+    @jwt_required()
+    @blp.response(200, AnimalSchema(many=True))
     def get(self):
         ##animals = AnimalModel.query.all()
         """""
@@ -85,11 +85,11 @@ class AnimalsAPI(MethodView):
         print(animal_list)
         return jsonify(animal_list)
     
-    
-    @blp.response(201)
+    @jwt_required()
+    @blp.response(201, AnimalSchema)
     def post(self):
         data = request.form.to_dict()
-        
+        user_id=get_jwt_identity()
         # Assuming 'photos' is the key for file uploads
         photos = request.files.getlist('photos')
         print(photos)
@@ -107,7 +107,7 @@ class AnimalsAPI(MethodView):
             description=data.get('description'),
             city=data['city'],
             country=data['country'],
-            user_id=data['user_id'],
+            user_id=user_id,
             type=data.get('type')
         )
 
@@ -131,8 +131,8 @@ class AnimalsAPI(MethodView):
         return jsonify({'message': 'Animal added successfully'}), 201
 @blp.route("/animal/<int:animal_id>")
 class FetchAnimal(MethodView):
-    
-    @blp.response(200)
+    @jwt_required()
+    @blp.response(200, AnimalSchema)
     def get(self, animal_id):
         animal = AnimalModel.query.get(animal_id)
         
@@ -150,7 +150,7 @@ class FetchAnimal(MethodView):
                 'photos': [url_for('Pets.photo', animal_id=animal.id, filename=photo.filename) for photo in animal.photos],
                 'city': animal.city,
                 'country': animal.country,
-                
+                'user_id':animal.user_id
             }
             print(animal_data)
             return jsonify(animal_data)
