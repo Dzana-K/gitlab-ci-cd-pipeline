@@ -169,7 +169,8 @@ snyk-scan-frontend:
   script: 
     - snyk auth $SNYK_TOKEN
     - snyk monitor 
- 
+  only:
+  - /^feature-.*$/    
 
 snyk_scan:
   stage: test
