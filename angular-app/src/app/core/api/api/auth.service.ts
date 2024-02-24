@@ -6,9 +6,9 @@ import { Observable, catchError, throwError, switchMap, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:5000';  
+  private apiUrl = 'https://pawadopt-api-981w.onrender.com';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(userCredentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, userCredentials).pipe(
@@ -25,7 +25,7 @@ export class AuthService {
   logout(): Observable<any> {
     const token = this.getAccessToken();
 
-    
+
 
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
@@ -47,35 +47,35 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/refresh`, {}, { headers });
   }
 
- 
+
   saveAccessToken(access_token: string): void {
-    
+
     localStorage.setItem('access_token', access_token);
-    
+
   }
-  saveRefreshToken(refresh_token: string ): void {
-    
-    
+  saveRefreshToken(refresh_token: string): void {
+
+
     localStorage.setItem('refresh_token', refresh_token);
   }
-  saveUserId(user_id:string):void{
-  localStorage.setItem('user_id', user_id);
+  saveUserId(user_id: string): void {
+    localStorage.setItem('user_id', user_id);
   }
-  removeUserId():void{
-  localStorage.removeItem('user_id');
+  removeUserId(): void {
+    localStorage.removeItem('user_id');
   }
   getAccessToken(): string | null {
-    
+
     return localStorage.getItem('access_token');
   }
   getUser(userId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${userId}`);
   }
   getRefreshToken(): string | null {
-    
+
     return localStorage.getItem('refresh_token');
   }
-  loadAuthenticatedUser(){
+  loadAuthenticatedUser() {
     return localStorage.getItem('user_id')
   }
 
@@ -87,15 +87,15 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getAccessToken();
   }
-  
+
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 409) {
       // Customize the error handling for status code 409 (Conflict)
       const errorMessage = error.error.message || 'A user with that email already exists.';
       return throwError(errorMessage);
-    } 
-    else if(error.status===401){
+    }
+    else if (error.status === 401) {
       const errorMessage = error.error.message || 'Invalid credentials.';
       return throwError(errorMessage);
     }

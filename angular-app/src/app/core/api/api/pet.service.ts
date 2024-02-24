@@ -6,9 +6,9 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class PetService {
-  private apiUrl = 'http://127.0.0.1:5000';  
-  constructor(private http: HttpClient) {}
-    
+  private apiUrl = 'https://pawadopt-api-981w.onrender.com';
+  constructor(private http: HttpClient) { }
+
   /*getAnimals(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/animals`);
   }*/
@@ -51,14 +51,14 @@ export class PetService {
   }
 
   sendEmail(emailData: any) {
-    
+
     console.log(emailData)
     return this.http.post(`${this.apiUrl}/send_email`, emailData, {
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     });
   }
   getUserPosts(): Observable<any> {
-    
+
     return this.http.get(`${this.apiUrl}/user/posts`, {}
     );
   }
