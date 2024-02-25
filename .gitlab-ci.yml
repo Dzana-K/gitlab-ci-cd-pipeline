@@ -16,7 +16,7 @@ deploy_production_frontend:
     name: production
     url: https://dashboard.render.com/web/srv-${DEPLOY_HOOK_01}
   only:
-  - feature  
+  - main  
 
 deploy_production-backend:
   stage: deploy
