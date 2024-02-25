@@ -230,7 +230,7 @@ snyk_scan:
     apt-get install nodejs npm -y
     npm install -g snyk
     snyk auth $SNYK_TOKEN
-    snyk test --file=requirements.txt 
+    snyk test 
   only:
   - main    
     
