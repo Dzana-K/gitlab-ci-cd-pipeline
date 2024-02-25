@@ -5,6 +5,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpParams } from '@angular/common/http';
 import { PetService } from './pet.service';
 import { ANIMALS } from '../../../../../server/db-data';
+import { environment } from '../../../../environments/environment.dev';
 
 describe('PetService', () => {
     let service: PetService;
@@ -36,7 +37,7 @@ describe('PetService', () => {
             expect(animals[0].name).toBe('Fluffy');
         });
 
-        const req = httpMock.expectOne(`https://pawadopt-api-981w.onrender.com/animals?type=Dog`);
+        const req = httpMock.expectOne(`${environment.baseUrl}/animals?type=Dog`);
         expect(req.request.method).toBe('GET');
         req.flush(Object.values(ANIMALS).filter((animal: any) => animal.type === 'Dog') as any[]);
     });
@@ -48,7 +49,7 @@ describe('PetService', () => {
             expect(animal.name).toBe('Fluffy');
         });
 
-        const req = httpMock.expectOne(`https://pawadopt-api-981w.onrender.com/animal/${animalId}`);
+        const req = httpMock.expectOne(`${environment.baseUrl}/animal/${animalId}`);
         expect(req.request.method).toBe('GET');
         req.flush(ANIMALS[animalId]);
     });

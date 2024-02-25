@@ -48,7 +48,7 @@
           <div class="animal-image">
             <a [routerLink]="['/pet/detail',animal.id]">
               <div>
-                <img [src]="'https://pawadopt-api-981w.onrender.com' + animal.photos[0]" alt="Animal Photo">
+                <img [src]="url + animal.photos[0]" alt="Animal Photo">
               </div>
             </a>
           </div>

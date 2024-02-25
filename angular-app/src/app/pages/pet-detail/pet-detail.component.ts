@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/api/api/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdoptionPageModalComponent } from '../adoption-page-modal/adoption-page-modal.component';
+import { environment } from '../../../environments/environment.dev';
 
 @Component({
   selector: 'app-pet-detail',
@@ -13,6 +14,7 @@ import { AdoptionPageModalComponent } from '../adoption-page-modal/adoption-page
 export class PetDetailComponent implements OnInit {
   id!: number;
   user: any;
+  url = environment.baseUrl;
   favorites: any[] = [];
   animalDetails: any;
   authenticatedUserId!: number;

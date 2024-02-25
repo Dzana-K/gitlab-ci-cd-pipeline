@@ -20,13 +20,13 @@
   <div class="pet-detail-container">
     <div class="pictures">
       <div class="picture-container">
-        <img *ngIf="animalDetails.photos && animalDetails.photos.length > 0"
-          [src]="'https://pawadopt-api-981w.onrender.com' + animalDetails.photos[0]" alt="Animal Photo" />
+        <img *ngIf="animalDetails.photos && animalDetails.photos.length > 0" [src]="url + animalDetails.photos[0]"
+          alt="Animal Photo" />
       </div>
       <div class="additional-photos">
         <!-- Additional photos -->
         <div *ngFor="let photo of animalDetails.photos.slice(1); let i = index" class="additional-photo">
-          <img [src]="'https://pawadopt-api-981w.onrender.com' + photo" alt="Additional Photo {{ i + 1 }}" />
+          <img [src]="url + photo" alt="Additional Photo {{ i + 1 }}" />
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { PetService } from '../../core/api/api/pet.service';
 import { AuthService } from '../../core/api/api/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment.dev';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,15 +14,15 @@ import { HttpParams } from '@angular/common/http';
 export class DashboardComponent implements OnInit {
   animals: any[] = [];
   selectedAnimalType: string | null = null;
-  constructor(private petService: PetService, private authService: AuthService, private router: Router, private route: ActivatedRoute){}
-  
+  constructor(private petService: PetService, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+  url = environment.baseUrl;
   searchQuery: string = '';
   selectedCity: string = '';
   selectedCountry: string = '';
   selectedGender: string = '';
   ngOnInit(): void {
     // Fetch initial animal data
-    
+
     this.route.queryParams.subscribe((params) => {
       this.selectedAnimalType = params['type'] || null;
       this.searchQuery = params['searchQuery'] || '';
@@ -111,7 +112,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-  
+
   addToFavorites(animalId: number): void {
     const data = { animal_id: animalId };
     this.petService.addFavorite(data).subscribe(

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../../core/api/api/auth.service';
 import { PetService } from '../../core/api/api/pet.service';
+import { environment } from '../../../environments/environment.dev';
 
 @Component({
   selector: 'app-user-info',
@@ -12,31 +13,32 @@ import { PetService } from '../../core/api/api/pet.service';
 })
 export class UserInfoComponent implements OnInit {
   authenticatedUserId!: number;
-  loadedUser!:string | null;
-  user:any;
+  loadedUser!: string | null;
+  user: any;
+  url = environment.baseUrl;
   animals: any[] = [];
-  constructor(private petService:PetService,
+  constructor(private petService: PetService,
     private authService: AuthService,
-              private route: ActivatedRoute,
-              private router: Router,
-              public dialog: MatDialog
-    ){}
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialog: MatDialog
+  ) { }
   ngOnInit(): void {
     this.loadedUser = this.authService.loadAuthenticatedUser();
     if (this.loadedUser !== null && this.loadedUser !== undefined) {
       this.authenticatedUserId = +this.loadedUser;
-      
+
     }
     this.loadUserInfo();
     this.fetchUserPosts();
   }
-  loadUserInfo(){
+  loadUserInfo() {
     this.authService.getUser(this.authenticatedUserId).subscribe(
-      (response)=>{
-        this.user=response;
-        
+      (response) => {
+        this.user = response;
+
       },
-      (error)=>{
+      (error) => {
         console.error('Error fetching user data', error);
       }
     )

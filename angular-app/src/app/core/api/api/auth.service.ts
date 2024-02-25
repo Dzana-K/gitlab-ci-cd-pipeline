@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError, switchMap, of, tap } from 'rxjs';
+import { environment } from '../../../../environments/environment.dev';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://pawadopt-api-981w.onrender.com';
+  private apiUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

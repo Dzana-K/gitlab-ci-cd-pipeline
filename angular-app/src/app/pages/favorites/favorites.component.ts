@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PetService } from '../../core/api/api/pet.service';
+import { environment } from '../../../environments/environment.dev';
 
 @Component({
   selector: 'app-favorites',
@@ -8,7 +9,8 @@ import { PetService } from '../../core/api/api/pet.service';
 })
 export class FavoritesComponent implements OnInit {
   favorites: any[] = [];
-  constructor(private petService: PetService){}
+  url = environment.baseUrl;
+  constructor(private petService: PetService) { }
   ngOnInit(): void {
     this.petService.getFavorites().subscribe(
       (response) => {
@@ -19,5 +21,5 @@ export class FavoritesComponent implements OnInit {
       }
     );
   }
- 
+
 }
