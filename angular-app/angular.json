@@ -60,6 +60,14 @@
             "development": {
               "optimization": false,
               "extractLicenses": false
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stg.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
