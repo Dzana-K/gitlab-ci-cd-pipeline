@@ -14,20 +14,41 @@ deploy_production_frontend:
     - curl -s "https://api.render.com/deploy/srv-${DEPLOY_HOOK_01}?key=${DEPLOY_HOOK_02}" -o file.txt >/dev/null 2>&1
   environment:
     name: production
-    url: https://dashboard.render.com/web/srv-${DEPLOY_HOOK_01}
+    url: https://pawadopt.onrender.com
   only:
-  - feature 
+  - main 
+  when: manual 
 
 deploy_production-backend:
   stage: deploy
   script:
     - echo "Deploy to production server"
     - curl -s "https://api.render.com/deploy/srv-${DEPLOY_HOOK_03}?key=${DEPLOY_HOOK_04}" -o file.txt >/dev/null 2>&1
+  
+  only:
+  - main
+  when: manual 
+
+deploy_staging_frontend:
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+    - curl -s "https://api.render.com/deploy/srv-${DEPLOY_HOOK_05}?key=${DEPLOY_HOOK_06}" -o file.txt >/dev/null 2>&1
   environment:
     name: production
-    url: https://dashboard.render.com/web/srv-${DEPLOY_HOOK_02}
+    url: https://pawadopt-staging.onrender.com
   only:
-  - feature
+  - main 
+
+deploy_staging-backend:
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+    - curl -s "https://api.render.com/deploy/srv-${DEPLOY_HOOK_07}?key=${DEPLOY_HOOK_08}" -o file.txt >/dev/null 2>&1
+  
+  only:
+  - main
+
 build_backend:
   image: docker:latest
   services:
@@ -41,6 +62,7 @@ build_backend:
     - docker push $DOCKER_IMAGE_TAG
   only:
   - /^feature-.*$/ 
+
 
 lint-frontend:
   stage: test
