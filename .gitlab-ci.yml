@@ -8,7 +8,7 @@ stages:
 variables:
   DOCKER_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
-deploy_production_frontend:
+deploy-production_frontend:
   stage: deploy_production
   script:
     - echo "Deploy to production server"
@@ -20,7 +20,7 @@ deploy_production_frontend:
   - main 
   when: manual 
 
-deploy_production-backend:
+deploy-production-backend:
   stage: deploy_production
   script:
     - echo "Deploy to production server"
@@ -30,7 +30,7 @@ deploy_production-backend:
   - main
   when: manual 
 
-deploy_staging_frontend:
+deploy-staging_frontend:
   stage: deploy_staging
   script:
     - echo "Deploy to staging server"
@@ -41,7 +41,7 @@ deploy_staging_frontend:
   only:
   - feature 
 
-deploy_staging-backend:
+deploy-staging-backend:
   stage: deploy_staging
   script:
     - echo "Deploy to staging server"
@@ -79,11 +79,9 @@ lint-frontend:
   script:
     - npm run lint
   allow_failure: true
-  artifacts:
-    paths:
-      - angular-app/eslint-reports/
+  
   only:
-  - main 
+  - feature 
 
 build-frontend:
   stage: build
@@ -107,15 +105,10 @@ e2e-frontend:
   stage: test
   before_script:
     - cd angular-app
-    - npm install
-    
-  script:
-    
-    
-    
+    - npm install   
+  script:    
     - npm start &
-    - sleep 10
-    
+    - sleep 10   
     - npm run cypress:run
   only:
   - /^feature-.*$/ 
@@ -123,11 +116,8 @@ e2e-frontend:
 unit-test-frontend:
   stage: test
   image: trion/ng-cli-karma
-  
   before_script:
-    - cd angular-app
-    
-    
+    - cd angular-app   
   script:
     - npm ci
     - ng test --progress false --watch false
@@ -147,7 +137,7 @@ lint-test-backend:
     paths:
       - api/flake_reports/
   only:
-  - main    
+  - faeture    
   
 pytest-backend:
   image: python:3.8.0-slim
@@ -254,3 +244,21 @@ run-dast-job:
       - api/zap_report.html
   only:
   - /^feature-.*$/    
+
+run-dast-job:
+    stage: dast-scan
+    image: maven:3.8.5-openjdk-11-slim
+    script: |
+      apt-get update
+      apt-get -y install wget
+      wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2.11.1_Linux.tar.gz
+      mkdir zap
+      tar -xvf ZAP_2.11.1_Linux.tar.gz
+      cd ZAP_2.11.1
+      ./zap.sh -cmd -quickurl https://pawadopt-staging.onrender.com/login -quickprogress -quickout ../zap_report.html 
+    artifacts:
+      paths:
+        - zap_report.html
+    only:
+    - main    
+
