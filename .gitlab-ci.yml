@@ -260,5 +260,5 @@ run-dast-job:
     paths:
       - zap_report.html
   only:
-  - main    
+  - feature    
 
