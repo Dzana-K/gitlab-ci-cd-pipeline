@@ -1,9 +1,9 @@
 stages:
   - build
   - test
-  - deploy_staging
+  - deploy-staging
   - dast-scan
-  - deploy_production
+  - deploy-production
 
 variables:
   DOCKER_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
@@ -50,7 +50,7 @@ deploy-staging-backend:
   only:
   - main
 
-build_backend:
+build-backend:
   image: docker:latest
   services:
     - docker:dind
