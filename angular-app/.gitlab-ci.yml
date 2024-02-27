@@ -1,0 +1,129 @@
+stages:
+  - build
+  - test
+  - deploy-staging
+  - dast-scan
+  - deploy-production
+
+variables:
+  DOCKER_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+
+deploy-production-frontend:
+  stage: deploy-production
+  script:
+    - echo "Deploy to production server"
+    - curl -s "https://api.render.com/deploy/srv-${DEPLOY_HOOK_01}?key=${DEPLOY_HOOK_02}" -o file.txt >/dev/null 2>&1
+  environment:
+    name: production
+    url: https://pawadopt.onrender.com
+  only:
+  - main 
+  when: manual 
+
+
+
+deploy-staging-frontend:
+  stage: deploy-staging
+  script:
+    - echo "Deploy to staging server"
+    - curl -s "https://api.render.com/deploy/srv-${DEPLOY_HOOK_05}?key=${DEPLOY_HOOK_06}" -o file.txt >/dev/null 2>&1
+  environment:
+    name: staging
+    url: https://pawadopt-staging.onrender.com
+  only:
+  - main 
+
+
+
+lint-frontend:
+  stage: test
+  image: node:latest
+  cache:
+    paths:
+      - node_modules/
+  before_script:
+    - npm install
+    - npm install -g @angular/cli
+  script:
+    - npm run lint
+  allow_failure: true
+
+
+build-frontend:
+  stage: build
+  image: node:latest
+  cache:
+    paths:
+      - node_modules/
+  before_script:
+    - npm install
+    - npm install -g @angular/cli
+  script:
+    - npm run build --prod
+
+
+e2e-frontend:
+  image: cypress/base
+
+  stage: test
+  before_script:
+    - npm install   
+  script:    
+    - npm start &
+    - sleep 10   
+    - npm run cypress:run
+
+
+unit-test-frontend:
+  stage: test
+  image: trion/ng-cli-karma 
+  script:
+    - npm ci
+    - ng test --progress false --watch false
+  
+  
+
+
+run-sast-job-frontend:
+  stage: test
+  image: sonarsource/sonar-scanner-cli 
+  script: |
+    apk update && apk add --no-cache unzip curl jq
+    curl -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+    unzip -q sonar-scanner-cli-5.0.1.3006-linux.zip -d sonar-scanner
+    export PATH="$PATH:$(pwd)/sonar-scanner/sonar-scanner-5.0.1.3006-linux/bin"
+    sonar-scanner -Dsonar.projectKey=pawadopt-frontend_pawadopt-frontend -Dsonar.organization=pawadopt-frontend -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.login=$SONAR_TOKEN
+    sleep 5 
+    quality_status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=pawadopt-frontend_pawadopt-frontend | jq -r '.projectStatus.status')
+    echo "SonarCloud Analysis Status is $quality_status"; 
+    if [[ $quality_status == "ERROR" ]] ; then exit 1;fi
+
+
+snyk-scan-frontend:
+  stage: test
+  image: node:latest
+  before_script:
+    - npm install -g snyk   
+  script: 
+    - snyk auth $SNYK_TOKEN
+    - snyk monitor 
+  
+
+
+run-dast-job:
+  stage: dast-scan
+  image: maven:3.8.5-openjdk-11-slim
+  script: |
+    apt-get update
+    apt-get -y install wget
+    wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2.14.0_Linux.tar.gz
+    mkdir zap
+    tar -xvf ZAP_2.14.0_Linux.tar.gz
+    cd ZAP_2.14.0
+    ./zap.sh -cmd -quickurl https://pawadopt-staging.onrender.com -quickprogress -quickout ../zap_report.html 
+  artifacts:
+    paths:
+      - zap_report.html
+  only:
+  - main    
+
