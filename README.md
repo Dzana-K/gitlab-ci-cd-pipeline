@@ -13,7 +13,7 @@ For the frontend, I performed **eslint tests** to check the correctness of the c
 
 After merging the code into the main branch and deploying it to the staging environment, a **DAST** (Dynamic Application Security Testing) analysis is performed using the ZAP tool. This process allows us to be informed about any issues early in the development cycle, fix errors, and ensure the safe and efficient operation of the application.
 
-For **CD**, I implemented two stages: **deployment to the test environment** (deploy staging) and **deployment to the production environment* (deploy production). When a developer completes their feature branch and merges the changes into the main branch, the process of deploying the code to the test environment is triggered. This environment allows thorough testing to ensure that all changes are successfully integrated before we release them for broader use. 
+For **CD**, I implemented two stages: **deployment to the test environment** (deploy staging) and **deployment to the production environment** (deploy production). When a developer completes their feature branch and merges the changes into the main branch, the process of deploying the code to the test environment is triggered. This environment allows thorough testing to ensure that all changes are successfully integrated before we release them for broader use. 
 If the developers are satisfied with the test results in the test environment, they have the option to manually trigger the deployment process to the production environment. 
 This ensures control over the process and verification that all changes are tested and approved before being sent to production.
 
